@@ -1,0 +1,38 @@
+[ ] Setup
+	[ ] Create app
+	[ ] Version control in Github
+	[ ] Deploy to production server
+	[ ] Set up subdomain p4.andmade.me
+
+
+[ ] Homepage
+	[ ] Welcome
+	[ ] Links to View All Movies, Events, Search, Login
+	[ ] Show Recently Added Movies and New Events
+
+
+[ ] Users	
+	[ ] Login
+	[ ] Signup
+	[ ] Page Showing All Movies
+	[ ] Individual Movie Page with title, synopsis, director, cast, release date, availability
+
+[ ] Movies (Registered User)
+	[ ] View Movies They Have Checked Out
+	[ ] View/Create/Edit The Movie Queues (Separate Page for Each)
+	[ ] Recommend a movie to be added to library
+	[ ] Page that Shows After Movie is Checked Out (with confirmation and due date)
+
+[ ] Movies (Admin)
+	[ ] Page to add new movies
+	[ ] Page to edit existing movies
+	[ ] Listing page of all movies (with ability to filter by availability)
+	[ ] Listing page of all users with movies checked out
+		
+
+[ ] Finalize
+    [ ] Test all features
+	[ ] Observe someone else use the application
+	[ ] Validate, spell check
+	[ ] Dummy admin accounts for teaching team
+
