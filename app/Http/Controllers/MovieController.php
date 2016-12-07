@@ -3,6 +3,7 @@
 namespace P4\Http\Controllers;
 
 use Illuminate\Http\Request;
+use P4\Movie;
 
 class MovieController extends Controller
 {
@@ -13,7 +14,9 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
+        $movies = Movie::all();
+        dump($movies);
+        return view('layouts.master')->with("movies", $movies);
     }
 
     /**
