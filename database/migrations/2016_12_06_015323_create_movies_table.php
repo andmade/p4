@@ -17,11 +17,11 @@ class CreateMoviesTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
-            $table->string("title");
-            $table->text("synopsis");
-            $table->integer("released");
-            $table->string("poster");
-            $table->boolean("available");
+            $table->string('title');
+            $table->text('synopsis');
+            $table->integer('released');
+            $table->string('poster');
+            $table->boolean('available');
         });
     }
 

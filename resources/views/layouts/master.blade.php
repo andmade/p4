@@ -31,7 +31,7 @@
                     <p>
                         {{$movie->synopsis}}
                     </p>
-                    <img src="{{$movie->poster}}" style="width:150px"/>
+                    <img src="{{$movie->poster}}"/>
                 </section>
                 @endforeach
             </div>

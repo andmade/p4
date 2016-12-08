@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use P4\Movie;
 
 class MoviesTableSeeder extends Seeder
 {
@@ -11,39 +12,26 @@ class MoviesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table("movies")->insert([
-            "created_at" => Carbon\Carbon::now()->toDateTimeString(),
-            'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
-            "title"      => "10 Cloverfield Lane",
-            "released"   => 2016,
-            "synopsis"   => "After getting in a car accident, a woman is held in a shelter with two men, who claim the outside world is affected by a widespread chemical attack.",
-            "poster"     => "/img/posters/ten_cloverfield_lane.jpg",
-            "available"  => true,
-        ]);
-        DB::table("movies")->insert([
-            "created_at" => Carbon\Carbon::now()->toDateTimeString(),
-            "updated_at" => Carbon\Carbon::now()->toDateTimeString(),
-            "title"      => "Queen of Katwe",
-            "released"   => 2016,
-            "synopsis"   => "A Ugandan girl sees her world rapidly change after being introduced to the game of chess.",
-            "poster"     => "/img/posters/queen_of_katwe.jpg",
-            "available"  => true,
-        ]);DB::table("movies")->insert([
-            "created_at" => Carbon\Carbon::now()->toDateTimeString(),
-            "updated_at" => Carbon\Carbon::now()->toDateTimeString(),
-            "title"      => "Captain America: Civil War",
-            "released"   => 2016,
-            "synopsis"   => "A Ugandan girl sees her world rapidly change after being introduced to the game of chess.",
-            "poster"     => "/img/posters/queen_of_katwe.jpg",
-            "available"  => true,
-        ]);DB::table("movies")->insert([
-            "created_at" => Carbon\Carbon::now()->toDateTimeString(),
-            "updated_at" => Carbon\Carbon::now()->toDateTimeString(),
-            "title"      => "The Perfect Score",
-            "released"   => 2016,
-            "synopsis"   => "A Ugandan girl sees her world rapidly change after being introduced to the game of chess.",
-            "poster"     => "/img/posters/queen_of_katwe.jpg",
-            "available"  => true,
-        ]);
+        $seederMovies = array(
+            "10 Cloverfield Lane"        => 2016,
+            "Queen of Katwe"             => 2016,
+            "Captain America: Civil War" => 2016,
+            "The Perfect Score"          => 2004,
+            "Snowpiercer"                => 2013,
+        );
+
+        foreach ($seederMovies as $title => $year) {
+            $seed_movie = Movie::apiRetrieveMovie($title, $year);
+
+            $movie            = new Movie();
+            $movie->title     = $seed_movie->title;
+            $movie->released  = $seed_movie->year;
+            $movie->synopsis  = $seed_movie->plot;
+            $movie->poster    = Movie::retrievePoster($seed_movie->poster);
+            $movie->available = true;
+
+            $movie->save();
+
+        };
     }
 }
