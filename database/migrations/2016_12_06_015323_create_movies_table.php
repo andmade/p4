@@ -14,6 +14,8 @@ class CreateMoviesTable extends Migration
     public function up()
     {
         Schema::create('movies', function (Blueprint $table) {
+
+            File::makeDirectory(public_path() . "/img/posters");
             $table->increments('id');
             $table->timestamps();
 
@@ -32,6 +34,7 @@ class CreateMoviesTable extends Migration
      */
     public function down()
     {
+        File::deleteDirectory(public_path() . "/img/posters");
         Schema::dropIfExists('movies');
     }
 }

@@ -38,10 +38,12 @@ Route::get("/account/queues/{queue}/edit", "QueueController@edit")->name("queues
 Route::put("/account/queues/{queue}", "QueueController@update")->name("queues.update");
 Route::delete("/account/queues/{queue}", "QueueController@destroy")->name("queues.destroy");
 
+
+// Debug Routes
 if(App::environment('local')) {
 
     Route::get('/drop', function() {
-
+    	File::deleteDirectory(public_path() . "/img/posters");
         DB::statement('DROP database p4');
         DB::statement('CREATE database p4');
 
@@ -84,3 +86,6 @@ Route::get('/debug', function() {
     echo '</pre>';
 
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

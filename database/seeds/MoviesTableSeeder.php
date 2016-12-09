@@ -18,6 +18,7 @@ class MoviesTableSeeder extends Seeder
             "Captain America: Civil War" => 2016,
             "The Perfect Score"          => 2004,
             "Snowpiercer"                => 2013,
+            "Winter Soldier"             => 2014,
         );
 
         foreach ($seederMovies as $title => $year) {

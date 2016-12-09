@@ -25,7 +25,7 @@ class MovieController extends Controller
 
         $test = Imdb::retrieve('winter soldier', Imdb::TYPE_MOVIE, 2014);
 
-        var_dump($test);
+        dump($movies);
         return view('layouts.master')->with('movies', $movies);
     }
 
