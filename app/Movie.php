@@ -19,6 +19,17 @@ class Movie extends Model
     }
 
     /**
+     * Associate Movie with User
+     *
+     * @return void
+     */
+    public function users()
+    {
+        return $this->belongsToMany('P4\User')->withTimestamps();
+    }
+}
+
+    /**
      * Retrieve Movie Details from the api
      *
      * @return $movie (array of string key->value pairs)

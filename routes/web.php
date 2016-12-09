@@ -38,6 +38,10 @@ Route::get("/account/queues/{queue}/edit", "QueueController@edit")->name("queues
 Route::put("/account/queues/{queue}", "QueueController@update")->name("queues.update");
 Route::delete("/account/queues/{queue}", "QueueController@destroy")->name("queues.destroy");
 
+Auth::routes();
+Route::get('/logout','Auth\LoginController@logout')->name('logout');
+
+Route::get('/home', 'HomeController@index');
 
 // Debug Routes
 if(App::environment('local')) {
@@ -86,6 +90,16 @@ Route::get('/debug', function() {
     echo '</pre>';
 
 });
-Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/show-login-status', function() {
+
+    # You may access the authenticated user via the Auth facade
+    $user = Auth::user();
+
+    if($user)
+        dump($user->toArray());
+    else
+        dump('You are not logged in.');
+
+    return;
+});

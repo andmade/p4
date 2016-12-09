@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Associate User with Movie
+     *
+     * @return void
+     */
+    public function movies()
+    {
+        return $this->belongsToMany('P4\Movie')->withTimestamps();
+    }
 }
