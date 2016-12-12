@@ -13,7 +13,7 @@
 
 // Homepage
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('adminmovies.index');
 });
 
 //Public Movie Resource Routes
@@ -21,12 +21,12 @@ Route::get("/movies", "MovieController@index")->name("movies.index");
 Route::get("/movies/show", "MovieController@show")->name("movies.show");
 
 // Private (Admin Only) Movie Resource Routes
-Route::get("/admin/movies", "MovieController@index")->name("movies.index");
+Route::get("/admin/movies", "MovieController@index")->name("adminmovies.index");
 Route::get("/admin/movies/create", "MovieController@create")->name("movies.create");
-Route::post("/admin/movies/create", "MovieController@store")->name("movies.store");
-Route::get("/admin/movies/show", "MovieController@show")->name("movies.show");
+Route::post("/admin/movies/", "MovieController@store")->name("movies.store");
+Route::get("/admin/movies/{movie}", "MovieController@show")->name("movies.show");
 Route::get("/admin/movies/{movie}/edit", "MovieController@edit")->name("movies.edit");
-Route::put("/admin/movies/{movie}/edit", "MovieController@update")->name("movies.update");
+Route::put("/admin/movies/{movie}/", "MovieController@update")->name("movies.update");
 Route::delete("/admin/movies/{movie}", "MovieController@destory")->name("movies.destroy");
 
 //Queue Resource Routes
@@ -38,9 +38,14 @@ Route::get("/account/queues/{queue}/edit", "QueueController@edit")->name("queues
 Route::put("/account/queues/{queue}", "QueueController@update")->name("queues.update");
 Route::delete("/account/queues/{queue}", "QueueController@destroy")->name("queues.destroy");
 
+//Recommations Pages
+Route::get("/account/recommendation/", "RecommendationController@index")->name("recommendations.index");
+Route::get("/account/recommendation/create", "RecommendationController@create`")->name("recommendations.create");
+Route::post("/account/recommendation/", "RecommendationController@store")->name("recommendations.store");
+
+
 Auth::routes();
 Route::get('/logout','Auth\LoginController@logout')->name('logout');
-
 Route::get('/home', 'HomeController@index');
 
 // Debug Routes

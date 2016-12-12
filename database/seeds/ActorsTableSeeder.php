@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use P4\Director;
+use P4\Actor;
 use P4\Movie;
 
-class DirectorsTableSeeder extends Seeder
+class ActorsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -24,15 +24,15 @@ class DirectorsTableSeeder extends Seeder
 
         foreach ($seederMovies as $title => $year) {
 
-            $seed_movie     = Movie::apiRetrieveMovie($title, $year);
-            $seed_directors = explode(", ", $seed_movie->director);
+            $seed_movie  = Movie::apiRetrieveMovie($title, $year);
+            $seed_actors = explode(", ", $seed_movie->actors);
 
-            foreach ($seed_directors as $seed_director) {
-                if (Director::isNewDirector($seed_director)) {
-                    $director       = new Director();
-                    $director->name = $seed_director;
+            foreach ($seed_actors as $seed_actor) {
+                if (Actor::isNewActor($seed_actor)) {
+                    $actor       = new Actor();
+                    $actor->name = $seed_actor;
 
-                    $director->save();
+                    $actor->save();
                 }
             };
         };

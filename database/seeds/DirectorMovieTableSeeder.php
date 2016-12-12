@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use P4\Movie;
 use P4\Director;
+use P4\Movie;
 
 class DirectorMovieTableSeeder extends Seeder
 {
@@ -24,12 +24,15 @@ class DirectorMovieTableSeeder extends Seeder
 
         foreach ($seederMovies as $seed_movie => $seed_directors) {
 
-            $movie = Movie::where('title', 'LIKE', '%'.$seed_movie.'%')->first();
-            
-            foreach ($seed_directors as $seed_director) {
-                $director = Director::where('name', 'LIKE', $seed_director)->first();
-                $movie->directors()->save($director);
-            }
-        }
+            $movie = Movie::where('title', 'LIKE', '%' . $seed_movie . '%')->first();
+
+            // Get the ids of the movie directors from their names
+            $seed_directors = array_map(function($director_name) {
+                return Director::where('name', 'LIKE', $director_name)->first()->id;
+            }, $seed_directors);
+
+            // Sync the movie with its directors
+            $movie->directors()->sync($seed_directors);            
+        };
     }
 }

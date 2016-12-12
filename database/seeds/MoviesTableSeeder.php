@@ -24,15 +24,17 @@ class MoviesTableSeeder extends Seeder
         foreach ($seederMovies as $title => $year) {
             $seed_movie = Movie::apiRetrieveMovie($title, $year);
 
-            $movie            = new Movie();
-            $movie->title     = $seed_movie->title;
-            $movie->released  = $seed_movie->year;
-            $movie->synopsis  = $seed_movie->plot;
-            $movie->poster    = Movie::retrievePoster($seed_movie->poster);
-            $movie->available = true;
+            if (Movie::isNewMovie($seed_movie->title, $seed_movie->year)) {
+                $movie            = new Movie();
+                $movie->title     = $seed_movie->title;
+                $movie->url       = str_slug($seed_movie->title, "-");
+                $movie->released  = $seed_movie->year;
+                $movie->synopsis  = $seed_movie->plot;
+                $movie->poster    = Movie::apiRetrievePoster($seed_movie->poster);
+                $movie->available = true;
 
-            $movie->save();
-
+                $movie->save();
+            }
         };
     }
 }

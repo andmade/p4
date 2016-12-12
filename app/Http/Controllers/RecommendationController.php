@@ -3,31 +3,17 @@
 namespace P4\Http\Controllers;
 
 use Illuminate\Http\Request;
-use P4\Director;
-use P4\Movie;
-use Jleagle\Imdb\Imdb;
-use Session;
 
-require_once '../vendor/autoload.php';
-// require_once '../../../apikey.php';
-
-class MovieController extends Controller
+class RecommendationController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
     {
-        $movies    = Movie::all();
-        $directors = Director::all();
-        // dump($movies);
-        $test = Imdb::retrieve('get on up', Imdb::TYPE_MOVIE, 2014);
-
-        // dump($test);
-        return view('admin.movies')->with('movies', $movies);
+        //
     }
 
     /**
@@ -59,18 +45,7 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-        $movie_fragments = explode("-", $id);
-        $movie_id = end($movie_fragments);
-
-        $movie = Movie::find($movie_id);
-        
-        if(is_null($movie)) {
-            Session::flash('message','Movie not found');
-            return redirect('/admin/movies');
-        }
-
-        // dump($test);
-        return view('movies.show')->with('movie', $movie);
+        //
     }
 
     /**

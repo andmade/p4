@@ -20,6 +20,7 @@ class CreateMoviesTable extends Migration
             $table->timestamps();
 
             $table->string('title');
+            $table->string('url');
             $table->text('synopsis');
             $table->integer('released');
             $table->string('poster');

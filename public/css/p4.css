@@ -1,0 +1,21 @@
+html {
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body {
+	font-family:"Muli", sans-serif !important;
+	background-color: #F0EFF0;
+	color: #000;
+}
+
+#navbar {
+	background-color: #31A2AC;
+}
+
+#navbar a {
+	color: #fff !important;
+	font-weight: bold;
+}
