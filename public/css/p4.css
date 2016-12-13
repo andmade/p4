@@ -11,6 +11,10 @@ body {
 	color: #000;
 }
 
+main {
+	margin: 0 2vw;
+}
+
 #navbar {
 	background-color: #31A2AC;
 }
@@ -19,3 +23,43 @@ body {
 	color: #fff !important;
 	font-weight: bold;
 }
+
+.movie-details h2 {
+	font-size: 2em;
+	font-weight:900;
+}
+
+.movie-details h3 {
+	font-size: 1em;
+	font-variant: small-caps;
+	font-weight: 900;
+	margin: 10px 0;
+}
+.movie-details p {
+	font-size: 1.3em;
+	font-weight:700;
+	margin: 5px 0;
+}
+
+.movie-details ul {
+	margin-top:5px;
+}
+.movie-details li {
+	list-style-type: none;
+	display: inline-block;
+	padding:0;
+	margin:0;
+	font-size: 1.3em;
+	font-weight:700;
+}
+.movie-details li::after {
+    content: ", ";
+}
+
+.movie-details li:last-child::after {
+    content: " ";
+}
+
+/*#movieCreateForm {
+	margin: 0 2vw;
+}*/

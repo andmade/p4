@@ -5,6 +5,7 @@ namespace P4\Http\Controllers;
 use Illuminate\Http\Request;
 use P4\Director;
 use P4\Movie;
+use P4\Genre;
 use Jleagle\Imdb\Imdb;
 use Session;
 
@@ -22,7 +23,6 @@ class MovieController extends Controller
     public function index()
     {
         $movies    = Movie::all();
-        $directors = Director::all();
         // dump($movies);
         $test = Imdb::retrieve('get on up', Imdb::TYPE_MOVIE, 2014);
 
@@ -37,8 +37,23 @@ class MovieController extends Controller
      */
     public function create()
     {
-        //
+        $genres = Genre::all();
+        return view('movies.create')->with('genres', $genres);
     }
+    /**
+     * Process the request to search API for a movie.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function apiMovieSearch(Request $request)
+    {
+        $found_movies = Imdb::search($request->createFormMovieTitle, Imdb::TYPE_MOVIE);
+
+        return view('movies.create-ajax')->with('found_movies', $found_movies);
+    }
+
+
 
     /**
      * Store a newly created resource in storage.
