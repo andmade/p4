@@ -1,30 +1,43 @@
 $(document).ready(function() {
     $('#apiMovieSearchButton').click(function(event) {
         event.preventDefault();
-        console.log($('#createFormMovieTitle').val());
+        console.log($('#detailFormMovieTitle').val());
         $.ajax({
-            url: '/admin/movies/create', // Route that will handle the request; its job is to return us books.
+            url: '/admin/movies/create',
             method: 'POST',
-            dataType: 'html', // Kind of data we're expecting to get back
-            data: { // Two pieces of data we'll send with the request
+            dataType: 'json',
+            data: {
                 '_token': $('input[name=_token]').val(),
-                'createFormMovieTitle': $('#createFormMovieTitle').val()
+                'movie_title': $('#detailFormMovieTitle').val(),
+                'movie_year': $('#detailFormMovieReleased').val(),
             },
-            // What to do before each ajax
+            // Show Searching message
             beforeSend: function() {
-                // $('#loading').show();
-                // $('#results').removeClass('error');
-                $('#movieFormSearchResults').html('trying');
+                $('#detailFormSearchMessage').text("Searching...");
+                $('#detailFormSearchMessage').show();
             },
-            // What to do upon completion of a successful ajax call
+            // Fill the form with the retrieved data
             success: function(data) {
-                // $('#loading').hide();
-                $('#movieFormSearchResults').html(data);
+                $('#detailFormMovieTitle').val(data["title"]);
+                $('#detailFormMovieReleased').val(data["year"]);
+                $('#detailFormMovieSynopsis').val(data["plot"]);
+                $('#detailFormMovieDirector').val(data["director"]);
+                $('#detailFormMovieActors').val(data["actors"]);
+                var genres = data["genre"];
+                $('[type="checkbox"]').map(function() {
+                    if (genres.includes($('label[for=' + this.id + ']').text())) {
+                        $(this).prop("checked", true);
+                    } else {
+                        $(this).prop("checked", false)
+                    }
+                });
+                $('#detailFormSearchMessage').text("Success! Movie found and information pre-filled!");
+                $('#detailFormSearchMessage').show();
             },
-            // What to do upon completion of an unsuccessful ajax call
+            // Show error message indicating movie data could not be found
             error: function() {
-                $('#movieFormSearchResults').html('Sorry, there was an error; your request could not be completed.');
-                // $('#results').addClass('error');
+                $('#detailFormSearchMessage').text("Error! Movie data could not be located.");
+                $('#detailFormSearchMessage').show();
             }
         });
     });

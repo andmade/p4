@@ -60,6 +60,10 @@ main {
     content: " ";
 }
 
+.control-group {
+	margin:0 !important;
+}
+
 /*#movieCreateForm {
 	margin: 0 2vw;
 }*/

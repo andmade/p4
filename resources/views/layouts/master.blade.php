@@ -10,13 +10,13 @@
         {{-- CSS --}}
         {{-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet"/> --}}
-        <link href="https://fonts.googleapis.com/css?family=Muli:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-        <link rel="stylesheet" href="http://cdn.ink.sapo.pt/3.1.10/css/ink-flex.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Muli:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"/>
+        <link rel="stylesheet" type="text/css" href="http://fastly.ink.sapo.pt/3.1.10/css/ink-flex.min.css"/>
+        <link rel="stylesheet" type="text/css" href="http://fastly.ink.sapo.pt/3.1.10/css/font-awesome.min.css">
         <link href="{{ URL::asset('css/p4.css') }}" rel="stylesheet"/>
         
         {{-- Javascript --}}
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-        <script src="http://fastly.ink.sapo.pt/3.1.10/js/ink-all.js" type="text/javascript"></script>
         @yield("head")
     </head>
 </html>
@@ -35,11 +35,6 @@
             </li>
         </ul>
     </nav>
-    <header id="mainHeader">
-        <h2>
-        andscene
-        </h2>
-    </header>
     <main>
         @yield("content")
     </main>
@@ -48,6 +43,8 @@
             © andmade {{ date('Y') }}
         </p>
     </footer>
+    <script type="text/javascript" src="http://fastly.ink.sapo.pt/3.1.10/js/ink-all.js"></script>
+    <script type="text/javascript" src="http://fastly.ink.sapo.pt/3.1.10/js/autoload.js"></script>
     <script src="{{ URL::asset('js/p4.js') }}"></script>
     @yield("body")
 </body>

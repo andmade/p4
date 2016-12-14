@@ -23,14 +23,14 @@ Route::get("/movies/show", "MovieController@show")->name("movies.show");
 // Private (Admin Only) Movie Resource Routes
 Route::get("/admin/movies", "MovieController@index")->name("adminmovies.index");
 Route::get("/admin/movies/create", "MovieController@create")->name("movies.create");
-Route::post("/admin/movies/create", "MovieController@apiMovieSearch")->name("movies.create-ajax");
+Route::post("/admin/movies/create", "MovieController@apiMovieSearch");
 
 
 Route::post("/admin/movies/", "MovieController@store")->name("movies.store");
 Route::get("/admin/movies/{movie}", "MovieController@show")->name("movies.show");
 Route::get("/admin/movies/{movie}/edit", "MovieController@edit")->name("movies.edit");
 Route::put("/admin/movies/{movie}/", "MovieController@update")->name("movies.update");
-Route::delete("/admin/movies/{movie}", "MovieController@destory")->name("movies.destroy");
+Route::delete("/admin/movies/{movie}", "MovieController@destroy")->name("movies.destroy");
 
 //Queue Resource Routes
 Route::get("/account/queues", "QueueController@index")->name("queues.index");

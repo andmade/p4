@@ -48,7 +48,7 @@
         </div>
         <div class="all-30 medium-50 small-100 small-order-1">
             <section class="movie-poster">
-                <img alt="" src="{{$movie->poster}}" style="width:300px"/>
+                <img alt="Movie poster" src="{{$movie->poster}}" style="width:300px"/>
             </section>
         </div>
     </div>
