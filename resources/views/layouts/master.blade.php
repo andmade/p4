@@ -21,18 +21,34 @@
     </head>
 </html>
 <body>
-    <nav id="navbar" class="ink-navigation" >
+    {{-- Flash Messages --}}
+    @if(Session::has('message'))
+    <div class="flash-message ink-alert basic" role="alert">
+        <button class="ink-dismiss">&times;</button>
+        <p><b>Warning:</b>{!!Session::get('message')!!}</p>
+    </div>
+    @endif
+
+    <nav id="navbar" class="ink-navigation blue" >
         <ul class="menu horizontal">
-            <li>
-                <a href="#">
-                    andscene
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Genres
-                </a>
-            </li>
+            <div class="push-left">
+                <div class="">
+                    <a href="#">
+                        <img src="holder.js/150x90/auto/ink" alt="">
+                    </a>
+                </div>
+            </div>
+            
+            <div class="push-right">
+                <!-- Authentication Links -->
+                @if (Auth::guest())
+                <li><a href="{{ url('/login') }}">Login</a></li>
+                <li><a href="{{ url('/register') }}">Register</a></li>
+                @else
+                <li><a href="#">Account</a></li>
+                <li><a href="{{ url('/logout') }}">Logout</a></li>
+                @endif
+            </div>
         </ul>
     </nav>
     <main>

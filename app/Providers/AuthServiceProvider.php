@@ -2,8 +2,11 @@
 
 namespace P4\Providers;
 
-use Illuminate\Support\Facades\Gate;
+
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use P4\Movie;
+use P4\Policies\MoviePolicy;
+
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +16,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'P4\Model' => 'P4\Policies\ModelPolicy',
+        'P4\Model'   => 'P4\Policies\ModelPolicy',
+        Movie::class => MoviePolicy::class,
     ];
 
     /**

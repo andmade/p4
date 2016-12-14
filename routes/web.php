@@ -13,24 +13,22 @@
 
 // Homepage
 Route::get('/', function () {
-    return redirect()->route('adminmovies.index');
+    return view('index');
 });
 
 //Public Movie Resource Routes
 Route::get("/movies", "MovieController@index")->name("movies.index");
-Route::get("/movies/show", "MovieController@show")->name("movies.show");
+Route::get("/movies/{movie}", "MovieController@show")->name("movies.show");
 
 // Private (Admin Only) Movie Resource Routes
-Route::get("/admin/movies", "MovieController@index")->name("adminmovies.index");
-Route::get("/admin/movies/create", "MovieController@create")->name("movies.create");
-Route::post("/admin/movies/create", "MovieController@apiMovieSearch");
-
-
-Route::post("/admin/movies/", "MovieController@store")->name("movies.store");
-Route::get("/admin/movies/{movie}", "MovieController@show")->name("movies.show");
-Route::get("/admin/movies/{movie}/edit", "MovieController@edit")->name("movies.edit");
-Route::put("/admin/movies/{movie}/", "MovieController@update")->name("movies.update");
-Route::delete("/admin/movies/{movie}", "MovieController@destroy")->name("movies.destroy");
+Route::get("/admin/movies", "MovieController@adminIndex")->middleware('can:create,P4\Movie');
+Route::get("/admin/movies/create", "MovieController@create")->middleware('can:create,P4\Movie');
+Route::post("/admin/movies/create", "MovieController@apiMovieSearch")->middleware('can:create,P4\Movie');
+Route::post("/admin/movies/", "MovieController@store")->middleware('can:create,P4\Movie');
+Route::get("/admin/movies/{movie}", "MovieController@show")->middleware('can:create,P4\Movie');
+Route::get("/admin/movies/{movie}/edit", "MovieController@edit")->middleware('can:create,P4\Movie');
+Route::put("/admin/movies/{movie}/", "MovieController@update")->middleware('can:create,P4\Movie');
+Route::delete("/admin/movies/{movie}", "MovieController@destroy")->middleware('can:create,P4\Movie');
 
 //Queue Resource Routes
 Route::get("/account/queues", "QueueController@index")->name("queues.index");

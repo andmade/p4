@@ -7,16 +7,27 @@ html {
 
 body {
 	font-family:"Muli", sans-serif !important;
-	background-color: #F0EFF0;
+	background-color: #FFFCF5;
 	color: #000;
+	min-height: 73vh;
+	padding-bottom: 2vh;
 }
 
 main {
 	margin: 0 2vw;
 }
 
+footer p {
+	clear: both;
+	margin: 0 auto;
+	text-align: center;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+}
+
 #navbar {
-	background-color: #31A2AC;
+	background-color: #F47D4A;
 }
 
 #navbar a {
@@ -67,3 +78,4 @@ main {
 /*#movieCreateForm {
 	margin: 0 2vw;
 }*/
+

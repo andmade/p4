@@ -3,6 +3,7 @@
 namespace P4\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Jleagle\Imdb\Imdb;
 use P4\Actor;
 use P4\Director;
@@ -28,7 +29,24 @@ class MovieController extends Controller
         $test = Imdb::retrieve('winter soldier', Imdb::TYPE_MOVIE, 2014);
 
         // dump(json_encode($test->toArray(), 0));
-        return view('admin.movies')->with('movies', $movies);
+        $user = Auth::user();
+        return view('movies.index')->with('movies', $movies);
+    }
+
+    public function adminIndex()
+    {
+
+        $movies = Movie::all();
+        // dump($movies);
+        $test = Imdb::retrieve('winter soldier', Imdb::TYPE_MOVIE, 2014);
+
+        // dump($test);
+        $user = Auth::user();
+
+        if ($user->can('create', Movie::class)) {
+            $user = Auth::user();
+            return view('admin.movies')->with('movies', $movies);
+        }
     }
 
     /**
@@ -38,9 +56,16 @@ class MovieController extends Controller
      */
     public function create()
     {
-        $genres = Genre::all();
-        return view('movies.create')->with('genres', $genres);
+        $user = Auth::user();
+
+        if ($user->can('create', Movie::class)) {
+            $genres = Genre::all();
+            return view('movies.create')->with('genres', $genres);
+        } else {
+            return view('errors.403')->with('user', $user);
+        }
     }
+
     /**
      * Process the request to search API for a movie.
      *
@@ -150,7 +175,7 @@ class MovieController extends Controller
         // replaced with 503 page somehow
         if (is_null($movie)) {
             Session::flash('message', 'Movie not found');
-            return redirect('/admin/movies');
+            return redirect('/movies');
         }
 
         // dump($test);
