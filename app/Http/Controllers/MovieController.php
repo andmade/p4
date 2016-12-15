@@ -24,7 +24,7 @@ class MovieController extends Controller
 
     public function index()
     {
-        $movies = Movie::all();
+        $movies = Movie::paginate(32);
         // dump($movies);
         $test = Imdb::retrieve('winter soldier', Imdb::TYPE_MOVIE, 2014);
 
@@ -165,18 +165,20 @@ class MovieController extends Controller
  * @param  int  $id
  * @return \Illuminate\Http\Response
  */
-    public function show($id)
+    public function show($id, $slug)
     {
-        $movie_fragments = explode("-", $id);
-        $movie_id        = end($movie_fragments);
+        $movie = Movie::find($id);
 
-        $movie = Movie::find($movie_id);
-
-        // replaced with 503 page somehow
+        // If movie doesn't exist, kickback to movies list
         if (is_null($movie)) {
             Session::flash('message', 'Movie not found');
             return redirect('/movies');
         }
+
+        // If id doesn't match slug url, redirect to right slug url
+        if($slug != $movie->url) {
+            return redirect('/movies/'.$id.'-'.$movie->url);
+        }        
 
         // dump($test);
         return view('movies.show')->with('movie', $movie);

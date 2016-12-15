@@ -18,7 +18,7 @@ Route::get('/', function () {
 
 //Public Movie Resource Routes
 Route::get("/movies", "MovieController@index")->name("movies.index");
-Route::get("/movies/{movie}", "MovieController@show")->name("movies.show");
+Route::get("/movies/{id}-{slug}", "MovieController@show")->name("movies.show");
 
 // Private (Admin Only) Movie Resource Routes
 Route::get("/admin/movies", "MovieController@adminIndex")->middleware('can:create,P4\Movie');

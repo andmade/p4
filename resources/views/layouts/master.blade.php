@@ -29,14 +29,16 @@
     </div>
     @endif
 
-    <nav id="navbar" class="ink-navigation blue" >
+    <nav id="navbar" class="ink-navigation" >
         <ul class="menu horizontal">
-            <div class="push-left">
-                <div class="">
-                    <a href="#">
-                        <img src="holder.js/150x90/auto/ink" alt="">
-                    </a>
-                </div>
+            <div>
+                <li id="navlogo" ><a href="/"><img src="{{ URL::asset('img/andscene_small_white.png') }}" alt="Site logo" /></a></li>
+            </div>
+
+            <div>
+                <li><a href="{{ url('/movies') }}">Movies</a></li>
+                <li><a href="#">Genres</a></li>
+                <li><a href="#">MovieMixes</a></li>
             </div>
             
             <div class="push-right">
