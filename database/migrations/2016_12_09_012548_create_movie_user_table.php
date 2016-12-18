@@ -23,8 +23,8 @@ class CreateMovieUserTable extends Migration
             $table->foreign('movie_id')->references('id')->on('movies');
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->dateTime('borrow_date');
-            $table->dateTime('due_date');
+            $table->dateTime('borrowed_at');
+            $table->dateTime('due_at');
             $table->boolean('returned');
         });
     }

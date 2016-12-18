@@ -46,7 +46,7 @@ class Movie extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('P4\User')->withTimestamps();
+        return $this->belongsToMany('P4\User')->withTimestamps()->withPivot('borrowed_at', 'due_at', 'returned');
     }
 
 /*Query Functions*/

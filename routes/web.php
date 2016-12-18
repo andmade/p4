@@ -12,13 +12,16 @@
 */
 
 // Homepage
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', "PageController@Home")->name("homepage");
 
 //Public Movie Resource Routes
 Route::get("/movies", "MovieController@index")->name("movies.index");
 Route::get("/movies/{id}-{slug}", "MovieController@show")->name("movies.show");
+
+//Regular User Movie Routes/Functions
+Route::get("/account/{id}", "UserController@showDashboard")->name("user.dashboard")->middleware('auth');
+Route::post("/movies/{id}/checkout", "UserController@checkoutMovie")->middleware('auth');
+
 
 // Private (Admin Only) Movie Resource Routes
 Route::get("/admin/movies", "MovieController@adminIndex")->middleware('can:create,P4\Movie');
@@ -47,7 +50,6 @@ Route::post("/account/recommendation/", "RecommendationController@store")->name(
 
 Auth::routes();
 Route::get('/logout','Auth\LoginController@logout')->name('logout');
-Route::get('/home', 'HomeController@index');
 
 // Debug Routes
 if(App::environment('local')) {

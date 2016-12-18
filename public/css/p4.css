@@ -14,14 +14,21 @@ body {
 }
 main {
 	margin: 0 2vw;
-	margin-top: 100px;
+	margin-top: 80px;
 }
 h1, h2, h3, h4, h5, h6 {
-	color: #e1315b !important;
+	color: #e1315b;
 }
 .landing-title {
 	font-weight: 900;
 	font-size: 4em;
+}
+h2.landing-title {
+	margin-bottom: 0;
+}
+.landing-container {
+	position: relative;
+	top: -10vh;
 }
 footer p {
 	clear: both;
@@ -31,32 +38,21 @@ footer p {
 	position: absolute;
 	bottom: 0;
 }
-#navbar {
-	position: fixed;
-	width: 100%;
-	top: 0;
+.flash-message {
+	margin-top: 60px !important;
 }
-#navbar, .menu{
+#navbar, .menu {
 	background-color: #F47D4A;
+	z-index: 100;
 }
-
 .ink-navigation {
 	color: #fff !important;
 }
 .ink-navigation ul.pills li a {
-    color: #fff;
-    background: 0 0;
-    background-color: #008DCB;
+	color: #fff;
+	background: 0 0;
+	background-color: #008DCB;
 }
-
-.ink-navigation ul.pills li.disabled a {
-    color: #ccc;
-    text-shadow: #aaa 0 1px 0;
-}
-.pagination .active a, .pagination a:hover {
-	background-color: #e1315b !important;
-}
-
 #navbar .ink-navigation:after {
 	content: "";
 	display: table;
@@ -73,12 +69,13 @@ footer p {
 }
 .box {
 	border-radius: 3px;
-	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-	/*padding: 10px 25px;*/
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);	/*padding: 10px 25px;*/
 	margin-top: 60px;
 	min-width: 400px;
 }
-
+.movie-card img {
+	max-width: 150px;
+}
 .movie-card-poster {
 	padding-right: 10px;
 }
@@ -91,40 +88,54 @@ footer p {
 	color: #717171;
 	padding-top: 10px;
 }
-/*.info a {
-	border-radius: 2px;
-	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-	transition: all 0.5s ease 0s;
+.ink-navigation ul.pills li.disabled a {
+	color: #ccc;
+	text-shadow: #aaa 0 1px 0;
 }
-.info a:hover {
-	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.12);
-	transition: all 0.5s ease 0s;
-}*/
-.movie-details h2 {
+.pagination .active a, .pagination a:hover {
+	background-color: #e1315b !important;
+}
+.movie-details-title {
 	font-size: 2em;
 	font-weight: 900;
+	margin-bottom: 0;
+}
+.movie-details-genre, .movie-details-released {
+	font-weight: 300;
+}
+.movie-details-released {
+	font-size: 1.3rem;
+}
+.movie-details-genre {
+	border: 2px solid #000;
+	color: #000;
+	display: inline-block;
+	margin-right: 5px;
+	padding-bottom: 1px;
+	padding-top: 1px;
+	position: relative;
+	bottom: 1px;
+}
+.movie-details-synopsis, .movie-details-director, .movie-details-actor {
+	font-size: 1.2em;
+	font-weight: 600;
+}
+.movie-details-poster {
+	width: 300px;
 }
 .movie-details h3 {
-	font-size: 1em;
+	font-size: 1.3em;
 	font-variant: small-caps;
 	font-weight: 900;
 	margin: 10px 0;
-}
-.movie-details p {
-	font-size: 1.3em;
-	font-weight: 700;
-	margin: 5px 0;
 }
 .movie-details ul {
 	margin-top: 5px;
 }
 .movie-details li {
-	list-style-type: none;
 	display: inline-block;
 	padding: 0;
 	margin: 0;
-	font-size: 1.3em;
-	font-weight: 700;
 }
 .movie-details li::after {
 	content: ", ";
@@ -132,10 +143,9 @@ footer p {
 .movie-details li:last-child::after {
 	content: " ";
 }
+.checkout-movie-modal h2 {
+	color: #000;
+}
 .control-group {
 	margin: 0 !important;
 }
-
-/*#movieCreateForm {
-	margin: 0 2vw;
-}*/

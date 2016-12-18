@@ -34,6 +34,6 @@ class User extends Authenticatable
      */
     public function movies()
     {
-        return $this->belongsToMany('P4\Movie')->withTimestamps();
+        return $this->belongsToMany('P4\Movie')->withTimestamps()->withPivot('borrowed_at', 'due_at', 'returned');
     }
 }
