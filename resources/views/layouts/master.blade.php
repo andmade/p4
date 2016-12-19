@@ -38,7 +38,7 @@
                     <li><a href="{{ url('/login') }}">Login</a></li>
                     <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
-                    <li><a href="/account">Account</a></li>
+                    <li><a href="{{url ('/account')}}">Account</a></li>
                     <li><a href="{{ url('/logout') }}">Logout</a></li>
                     @endif
                 </div>
@@ -62,8 +62,9 @@
         </main>
         <footer>
             <p>
-                © andmade {{ date('Y') }} 
-                @if(Auth::user()->role =='admin')
+                © andmade {{ date('Y') }}
+                <?php $user = Auth::user(); ?> 
+                @if($user && ($user->role == 'admin'))
                 <span>| <a href="/admin/movies">Admin Dashboard</a></span>
                 @endif
             </p>

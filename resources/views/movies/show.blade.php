@@ -66,6 +66,7 @@
         </div>
     </div>
     
+    @if(Auth::user())
     <div class="ink-shade fade">
         <div class="ink-modal fade add-moviemix-modal" data-trigger="#movieAddMixTrigger" data-width="800px" data-height="400px" data-close-on-click="true" role="dialog" aria-hidden="true" aria-labelled-by="modal-title">
             <div class="modal-body add-moviemix-modal-body">
@@ -76,7 +77,7 @@
                     {{ Form::hidden('movie_id', $movie->id)  }}
                     <?php $movie_mixes = Auth::user()->movie_mixes()->get(); ?>
                     <h3>Which moviemix would you like to add this movie to?</h3>
-                    @if($movie_mixes)
+                    @if(Auth::user() && $movie_mixes)
                     <div class="control-group all-100">
                         <ul class="control unstyled">
                             @foreach($movie_mixes as $movie_mix)
@@ -94,5 +95,6 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 @stop

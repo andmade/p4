@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section("content")
 
-<h2><a href="/admin/movies/create">Add A Movie to The Database</a></h2>
+<h2><a href="/admin/movies/create">Add A Movie to The Database</a>  </h2>
 <div class="ink-grid">
     <div class="column-group">
         <div class="all-100 large-25">

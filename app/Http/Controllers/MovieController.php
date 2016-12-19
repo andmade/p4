@@ -24,7 +24,7 @@ class MovieController extends Controller
 
     public function index()
     {
-        $movies = Movie::paginate(24);
+        $movies = Movie::paginate(12);
         // dump($movies);
         $test = Imdb::retrieve('winter soldier', Imdb::TYPE_MOVIE, 2014);
 

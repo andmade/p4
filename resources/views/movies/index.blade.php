@@ -10,7 +10,7 @@
         </section>
         @endforeach
     </div>
-    
+   
 </div>
-
+ {{ $movies->links() }}
 @stop
