@@ -9,6 +9,7 @@ use P4\Actor;
 use P4\Director;
 use P4\Genre;
 use P4\Movie;
+use P4\MovieMix;
 use Session;
 
 require_once '../vendor/autoload.php';
@@ -282,11 +283,14 @@ class MovieController extends Controller
     public function destroy($id, $slug)
     {
         $movie = Movie::find($id);
+        $movie_mixes = $movie->movie_mixes();
+        $movie->movie_mixes()->detach();
         $movie->users()->detach();
         $movie->directors()->detach();
         $movie->actors()->detach();
         $movie->genres()->detach();
         $movie->delete();
+        MovieMix::doesntHave('movies')->delete();
         Session::flash('success', 'Movie deleted!');
         return redirect('/admin/movies/');
     }
