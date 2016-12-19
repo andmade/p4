@@ -3,6 +3,8 @@
 namespace P4\Http\Controllers;
 
 use Illuminate\Http\Request;
+use P4\Recommendation;
+use Session;
 
 class RecommendationController extends Controller
 {
@@ -13,7 +15,7 @@ class RecommendationController extends Controller
      */
     public function index()
     {
-        //
+        return view('user.recommend');
     }
 
     /**
@@ -23,10 +25,10 @@ class RecommendationController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.recommend');
     }
 
-    /**
+     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -34,41 +36,20 @@ class RecommendationController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        // Validate the request!
+        $this->validate($request, [
+            'movie_title'    => 'required',
+            'movie_released' => 'required|date_format:Y',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        $recommendation = new Recommendation();
+        $recommendation->title = $request->movie_title;
+        $recommendation->released = $request->movie_released;
+        $recommendation->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        Session::flash('message', 'Movie recommendation added!');
+        return redirect('/account/recommend');
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**

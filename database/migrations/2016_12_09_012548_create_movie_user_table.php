@@ -11,6 +11,8 @@ class CreateMovieUserTable extends Migration
      *
      * @return void
      */
+
+    
     public function up()
     {
         Schema::create('movie_user', function (Blueprint $table) {

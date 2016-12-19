@@ -7,10 +7,18 @@ use Jleagle\Imdb\Imdb;
 
 class Movie extends Model
 {
-
 /*Relationship Functions */
     /**
-     * Associate Movie with Actor
+     * Associate Movie with Genre
+     *
+     * @return void
+     */
+    public function movie_mixes()
+    {
+        return $this->belongsToMany('P4\MovieMix')->withTimestamps();
+    } 
+    /**
+     * Associate Movie with Genre
      *
      * @return void
      */

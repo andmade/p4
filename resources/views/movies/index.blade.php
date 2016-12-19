@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section("content")
 
-<h2 class="all-100">All Movies</h2>
+<h2 class="all-100 fw-900">All Movies</h2>
 <div class="ink-grid ink-flex">
     <div class="column-group push-left movies gutters">
         @foreach($movies as $movie)

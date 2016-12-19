@@ -13,7 +13,7 @@
 <form class="ink-form" id="movieDetailForm" method="POST" action="/admin/movies">
 	{{ csrf_field() }}
 	<div class="column-group horizontal-gutters">
-		<div class="column-group all-50 small-100 tiny-100 horizontal-gutters">
+		<div class="column-group xlarge-50 large-50 medium-100 small-100 tiny-100 horizontal-gutters">
 			
 			{{-- Movie Title and Year --}}
 			<div class="column-group all-100 horizontal-gutters">

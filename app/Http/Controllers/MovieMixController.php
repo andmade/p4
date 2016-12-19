@@ -4,7 +4,7 @@ namespace P4\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class QueueController extends Controller
+class MovieMixController extends Controller
 {
     /**
      * Display a listing of the resource.

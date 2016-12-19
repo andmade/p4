@@ -24,12 +24,11 @@ class MovieController extends Controller
 
     public function index()
     {
-        $movies = Movie::paginate(32);
+        $movies = Movie::paginate(24);
         // dump($movies);
         $test = Imdb::retrieve('winter soldier', Imdb::TYPE_MOVIE, 2014);
 
         // dump(json_encode($test->toArray(), 0));
-        $user = Auth::user();
         return view('movies.index')->with('movies', $movies);
     }
 
@@ -62,7 +61,7 @@ class MovieController extends Controller
             $genres = Genre::all();
             return view('movies.create')->with('genres', $genres);
         } else {
-            return view('errors.403')->with('user', $user);
+            return view('index');
         }
     }
 
@@ -169,10 +168,10 @@ class MovieController extends Controller
     {
         $movie = Movie::find($id);
 
-        // If movie doesn't exist, kickback to movies list
+        // If movie doesn't exist, kickback
         if (is_null($movie)) {
             Session::flash('message', 'Movie not found');
-            return redirect('/movies');
+            return back()->withInput();
         }
 
         // If id doesn't match slug url, redirect to right slug url

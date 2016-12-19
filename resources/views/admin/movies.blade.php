@@ -13,7 +13,7 @@
             @foreach($movies as $movie)
             <section class="movies">
                 <ul>
-                    <li><a href="movies/{{$movie->url}}-{{$movie->id}}">{{$movie->title}}</a><a href="movies/{{$movie->id}}-{{$movie->url}}/edit"> (Edit)</a><a href="#" id="modalDeleteMovie{{$movie->id}}"> (Delete)</a></li>
+                    <li><a href="movies/{{$movie->id}}-{{$movie->url}}">{{$movie->title}}</a><a href="movies/{{$movie->id}}-{{$movie->url}}/edit"> (Edit)</a><a href="#" id="modalDeleteMovie{{$movie->id}}"> (Delete)</a></li>
                     <div class="ink-shade fade">
                         <div class="ink-modal fade delete-movie-modal" data-trigger="#modalDeleteMovie{{$movie->id}}" data-width="800px" data-height="150px" data-close-on-click="true" role="dialog" aria-hidden="true" aria-labelled-by="modal-title">
                             <div class="modal-body delete-movie-modal-body">

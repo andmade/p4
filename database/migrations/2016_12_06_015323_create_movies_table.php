@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateMoviesTable extends Migration
 {
@@ -14,28 +14,30 @@ class CreateMoviesTable extends Migration
     public function up()
     {
         Schema::create('movies', function (Blueprint $table) {
+            $path = public_path() . "/img/posters";
+            if (!File::exists($path)) {
+                File::makeDirectory($path);
+                $table->increments('id');
+                $table->timestamps();
 
-            File::makeDirectory(public_path() . "/img/posters");
-            $table->increments('id');
-            $table->timestamps();
-
-            $table->string('title');
-            $table->string('url');
-            $table->text('synopsis');
-            $table->integer('released');
-            $table->string('poster');
-            $table->boolean('available');
+                $table->string('title');
+                $table->string('url');
+                $table->text('synopsis');
+                $table->integer('released');
+                $table->string('poster');
+                $table->boolean('available');
+            }
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+        /**
+         * Reverse the migrations.
+         *
+         * @return void
+         */
+        public function down()
     {
-        File::deleteDirectory(public_path() . "/img/posters");
-        Schema::dropIfExists('movies');
+            File::deleteDirectory(public_path() . "/img/posters");
+            Schema::dropIfExists('movies');
+        }
     }
-}

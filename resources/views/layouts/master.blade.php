@@ -30,6 +30,7 @@
                     <li><a href="{{ url('/movies') }}">Movies</a></li>
                     <li><a href="#">Genres</a></li>
                     <li><a href="#">MovieMixes</a></li>
+                     @if (Auth::user()) <li><a href="/account/recommend">Recommend</a></li> @endif
                 </div>
                 
                 <div class="push-right">
@@ -38,7 +39,7 @@
                     <li><a href="{{ url('/login') }}">Login</a></li>
                     <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
-                    <li><a href="/account/{{ Auth::user()->id}}">Account</a></li>
+                    <li><a href="/account">Account</a></li>
                     <li><a href="{{ url('/logout') }}">Logout</a></li>
                     @endif
                 </div>

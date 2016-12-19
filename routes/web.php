@@ -19,19 +19,21 @@ Route::get("/movies", "MovieController@index")->name("movies.index");
 Route::get("/movies/{id}-{slug}", "MovieController@show")->name("movies.show");
 
 //Regular User Movie Routes/Functions
-Route::get("/account/{id}", "UserController@showDashboard")->name("user.dashboard")->middleware('auth');
+Route::get("/account", "UserController@showDashboard")->name("user.dashboard")->middleware('auth');
 Route::post("/movies/{id}/checkout", "UserController@checkoutMovie")->middleware('auth');
+Route::post("/movies/{id}/return", "UserController@returnMovie")->middleware('auth');
 
 
 // Private (Admin Only) Movie Resource Routes
 Route::get("/admin/movies", "MovieController@adminIndex")->middleware('can:create,P4\Movie');
 Route::get("/admin/movies/create", "MovieController@create")->middleware('can:create,P4\Movie');
-Route::post("/admin/movies/create", "MovieController@apiMovieSearch")->middleware('can:create,P4\Movie');
 Route::post("/admin/movies/", "MovieController@store")->middleware('can:create,P4\Movie');
-Route::get("/admin/movies/{movie}", "MovieController@show")->middleware('can:create,P4\Movie');
+Route::get("/admin/movies/{id}-{slug}", "MovieController@show")->middleware('can:create,P4\Movie');
 Route::get("/admin/movies/{movie}/edit", "MovieController@edit")->middleware('can:create,P4\Movie');
 Route::put("/admin/movies/{movie}/", "MovieController@update")->middleware('can:create,P4\Movie');
 Route::delete("/admin/movies/{movie}", "MovieController@destroy")->middleware('can:create,P4\Movie');
+#Ajax Movie Match Route
+Route::post("/admin/movies/create", "MovieController@apiMovieSearch")->middleware('can:create,P4\Movie'); 
 
 //Queue Resource Routes
 Route::get("/account/queues", "QueueController@index")->name("queues.index");
@@ -43,9 +45,9 @@ Route::put("/account/queues/{queue}", "QueueController@update")->name("queues.up
 Route::delete("/account/queues/{queue}", "QueueController@destroy")->name("queues.destroy");
 
 //Recommations Pages
-Route::get("/account/recommendation/", "RecommendationController@index")->name("recommendations.index");
-Route::get("/account/recommendation/create", "RecommendationController@create`")->name("recommendations.create");
-Route::post("/account/recommendation/", "RecommendationController@store")->name("recommendations.store");
+Route::get("/account/recommend/", "RecommendationController@index")->name("recommendations.index")->middleware('auth');
+Route::get("/account/recommend/create", "RecommendationController@create`")->name("recommendations.create")->middleware('auth');
+Route::post("/account/recommend/", "RecommendationController@store")->name("recommendations.store");
 
 
 Auth::routes();
@@ -56,6 +58,7 @@ if(App::environment('local')) {
 
     Route::get('/drop', function() {
     	File::deleteDirectory(public_path() . "/img/posters");
+        File::deleteDirectory(public_path() . "/img/mixescovers");
         DB::statement('DROP database p4');
         DB::statement('CREATE database p4');
 

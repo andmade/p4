@@ -30,13 +30,18 @@
                 @endforeach
             </ul>
             
-            @if (Auth::user())
-            <button class="ink-button green" id="movieCheckOutTrigger">Check Out</button>
-            @elseif ($movie->available)
-            <button class="ink-button green">Available</button>
-            @else
+            @if (!$movie->available)
             <button class="ink-button red">Unavailable</button>
+            @elseif (Auth::user())
+            <button class="ink-button green" id="movieCheckOutTrigger">Check Out</button>
+            @else            
+            <button class="ink-button green">Available</button>
             @endif
+
+            @if (Auth::user())
+            <button class="ink-button orange" id="movieAddMixTrigger">Add to MovieMix</button>
+            @endif
+
         </section>
     </div>
     

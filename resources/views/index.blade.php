@@ -13,7 +13,7 @@
 		<h2 class="all-100">Recently Added</h2>
 		
 		@foreach($recent_movies as $recent_movie)
-			<section class="movie-card all-auto align-center">
+			<section class="movie-card xlarge-auto large-auto medium-33 small-50 tiny-50 push-center">
 				<a href="/movies/{{$recent_movie->id}}-{{$recent_movie->url}}"><img alt="Movie poster" src="{{$recent_movie->poster}}" /></a>
 			</section>
 		@endforeach
