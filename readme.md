@@ -14,10 +14,9 @@ This app will serve as a library for hard copies of movies that can be loaned ou
 <https://docs.google.com/document/d/1u8zU6ba9saAiWIMrjun6TdW97a7o7P37QwHFgDi1IgA/edit#>
 
 #Resources
-+ **Foundation Framework** - <http://foundation.zurb.com/>
-+ **Google Fonts: Dosis and NTR** - <https://fonts.google.com/>
-+ **The UnOfficial Portal Wiki: GLaDOS Voice Lines** - <http://theportalwiki.com/wiki/GLaDOS_voice_lines>
-+ **webmozart/json Package** - <https://github.com/webmozart/json> (Used to encode data to json)
-+ **joshtronic/php-loremipsum Package** - <https://github.com/joshtronic/php-loremipsum> (Used to help create GLaDOS ipsum)
-+ **fzaninotto/faker Package** - <https://github.com/fzaninotto/Faker> (Used to generate fake user data)
-+ **MidnightDemon | Make Your Own Portal ID Card** - <http://midnightdemon.deviantart.com/art/Make-your-own-Portal-ID-Card-205927192> (basis of the user photos)
++ **Ink Framework** - <http://ink.sapo.pt/>
++ **Google Fonts: Muli** - <https://fonts.google.com/>
++ **Jleagle/omdb-imdb-api-client Package** - <https://github.com/Jleagle/omdb-imdb-api-client> (Used to retrieve results from the Open Movie Database)
++ **intervention/image Package** - <http://image.intervention.io/> (Used to download and retrieve movie poster images)
++ **Laravel: Authorization** - <https://laravel.com/docs/5.3/authorization> (Used to keep regular users away from admin functions)
++ **IconFinder** - <https://www.iconfinder.com/icons/110995/film_movie_icon#size=128> (source of film reel used in logo)
