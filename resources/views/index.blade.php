@@ -18,11 +18,6 @@
 			</section>
 		@endforeach
 	</div>
-	
-	<div class="column-group all-100">
-		<h2 class="all-100">Latest Movie Mixes</h2>
-		<p class="all-100">(row of recently added mix goes here)</p>
-	</div>
 </div>
 
 
