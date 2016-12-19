@@ -21,7 +21,7 @@ Route::get("/movies/{id}-{slug}", "MovieController@show")->name("movies.show");
 //Regular User Movie Routes/Functions
 Route::get("/account", "UserController@showDashboard")->name("user.dashboard")->middleware('auth');
 Route::post("/movies/{id}/checkout", "UserController@checkoutMovie")->middleware('auth');
-Route::post("/movies/{id}/return", "UserController@returnMovie")->middleware('auth');
+Route::post("/movies/{id}/return", "UserController@returnMovie")->middleware('can:create,P4\Movie');
 
 
 // Private (Admin Only) Movie Resource Routes
@@ -29,22 +29,22 @@ Route::get("/admin/movies", "MovieController@adminIndex")->middleware('can:creat
 Route::get("/admin/movies/create", "MovieController@create")->middleware('can:create,P4\Movie');
 Route::post("/admin/movies/", "MovieController@store")->middleware('can:create,P4\Movie');
 Route::get("/admin/movies/{id}-{slug}", "MovieController@show")->middleware('can:create,P4\Movie');
-Route::get("/admin/movies/{movie}/edit", "MovieController@edit")->middleware('can:create,P4\Movie');
-Route::put("/admin/movies/{movie}/", "MovieController@update")->middleware('can:create,P4\Movie');
-Route::delete("/admin/movies/{movie}", "MovieController@destroy")->middleware('can:create,P4\Movie');
+Route::get("/admin/movies/{id}-{slug}/edit", "MovieController@edit")->middleware('can:create,P4\Movie');
+Route::put("/admin/movies/{id}-{slug}/", "MovieController@update")->middleware('can:create,P4\Movie');
+Route::delete("/admin/movies/{id}-{slug}", "MovieController@destroy")->middleware('can:create,P4\Movie');
 #Ajax Movie Match Route
 Route::post("/admin/movies/create", "MovieController@apiMovieSearch")->middleware('can:create,P4\Movie'); 
 
-//Queue Resource Routes
-Route::get("/account/queues", "QueueController@index")->name("queues.index");
-Route::get("/account/queues/create", "QueueController@create")->name("queues.create");
-Route::post("/account/queues", "QueueController@store")->name("queues.store");
-Route::get("/account/queues/{queue}", "QueueController@show")->name("queues.show");
-Route::get("/account/queues/{queue}/edit", "QueueController@edit")->name("queues.edit");
-Route::put("/account/queues/{queue}", "QueueController@update")->name("queues.update");
-Route::delete("/account/queues/{queue}", "QueueController@destroy")->name("queues.destroy");
+//MovieMix Resource Routes
+Route::get("/moviemixes", "MovieMixController@index")->name("moviemixes.index");
+Route::get("/moviemixes/create", "MovieMixController@create")->name("moviemixes.create");
+Route::post("/moviemixes", "MovieMixController@store")->name("moviemixes.store");
+Route::get("/moviemixes/{id}", "MovieMixController@show")->name("moviemixes.show");
+Route::get("/moviemixes/{id}/edit", "MovieMixController@edit")->name("moviemixes.edit");
+Route::put("/moviemixes/{id}", "MovieMixController@update")->name("moviemixes.update");
+Route::delete("/moviemixes/{id}", "MovieMixController@destroy")->name("moviemixes.destroy");
 
-//Recommations Pages
+//Recommendations Pages
 Route::get("/account/recommend/", "RecommendationController@index")->name("recommendations.index")->middleware('auth');
 Route::get("/account/recommend/create", "RecommendationController@create`")->name("recommendations.create")->middleware('auth');
 Route::post("/account/recommend/", "RecommendationController@store")->name("recommendations.store");

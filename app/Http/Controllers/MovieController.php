@@ -102,7 +102,7 @@ class MovieController extends Controller
         ])->first();
 
         if ($database_movie_match) {
-            Session::flash('message', 'Error: Movie is already in the database');
+            Session::flash('error', 'Error: Movie is already in the database');
             return redirect('/admin/movies/create')->withInput();
         }
 
@@ -113,8 +113,12 @@ class MovieController extends Controller
         $new_movie->released  = $request->movie_released;
         $new_movie->url       = str_slug($new_movie->title, "-");
         $new_movie->synopsis  = $request->movie_synopsis;
-        $new_movie->poster    = Movie::apiRetrievePoster("https://images-na.ssl-images-amazon.com/images/M/MV5BMzA2NDkwODAwM15BMl5BanBnXkFtZTgwODk5MTgzMTE@._V1_SX600.jpg");
         $new_movie->available = true;
+        if ($request->movie_poster) {
+            $new_movie->poster = Movie::apiRetrievePoster($request->movie_poster);
+        } else {
+            $new_movie->poster = "/img/placeholder_poster.png";
+        }
         $new_movie->save();
 
         // Get ids of directors and sync with movies, creating new directors if necessary
@@ -154,7 +158,7 @@ class MovieController extends Controller
         // Sync genres with movies
         $new_movie->genres()->sync($request->movie_genres);
 
-        Session::flash('message', 'Movie added!');
+        Session::flash('success', 'Movie added!');
         return redirect('/admin/movies/create');
     }
 
@@ -170,14 +174,14 @@ class MovieController extends Controller
 
         // If movie doesn't exist, kickback
         if (is_null($movie)) {
-            Session::flash('message', 'Movie not found');
+            Session::flash('error', 'Movie not found');
             return back()->withInput();
         }
 
         // If id doesn't match slug url, redirect to right slug url
-        if($slug != $movie->url) {
-            return redirect('/movies/'.$id.'-'.$movie->url);
-        }        
+        if ($slug != $movie->url) {
+            return redirect('/movies/' . $id . '-' . $movie->url);
+        }
 
         // dump($test);
         return view('movies.show')->with('movie', $movie);
@@ -189,16 +193,14 @@ class MovieController extends Controller
  * @param  int  $id
  * @return \Illuminate\Http\Response
  */
-    public function edit($id)
+    public function edit($id, $slug)
     {
-        $movie_fragments = explode("-", $id);
-        $movie_id        = end($movie_fragments);
-        $retrieved_movie = Movie::find($movie_id);
+        $movie = Movie::find($id);
 
         $genres = Genre::all();
         return view('movies.edit')->with([
             'genres'          => $genres,
-            'retrieved_movie' => $retrieved_movie,
+            'retrieved_movie' => $movie,
         ]);
     }
 
@@ -209,7 +211,7 @@ class MovieController extends Controller
  * @param  int  $id
  * @return \Illuminate\Http\Response
  */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $slug)
     {
         // Validate the request!
         $this->validate($request, [
@@ -222,9 +224,7 @@ class MovieController extends Controller
         ]);
 
         // Update the movies
-        $movie_fragments = explode("-", $id);
-        $movie_id        = end($movie_fragments);
-        $movie           = Movie::find($movie_id);
+        $movie = Movie::find($id);
 
         $movie->title    = $request->movie_title;
         $movie->released = $request->movie_released;
@@ -269,7 +269,7 @@ class MovieController extends Controller
         // Get ids of actors and sync with movies
         $movie->genres()->sync($request->movie_genres);
 
-        Session::flash('message', 'Movie updated!');
+        Session::flash('success', 'Movie updated!');
         return redirect('/admin/movies/');
     }
 
@@ -279,17 +279,15 @@ class MovieController extends Controller
  * @param  int  $id
  * @return \Illuminate\Http\Response
  */
-    public function destroy($id)
+    public function destroy($id, $slug)
     {
-        $movie_fragments = explode("-", $id);
-        $movie_id        = end($movie_fragments);
-        $movie           = Movie::find($movie_id);
-
+        $movie = Movie::find($id);
+        $movie->users()->detach();
         $movie->directors()->detach();
         $movie->actors()->detach();
         $movie->genres()->detach();
         $movie->delete();
-        Session::flash('message', 'Movie deleted!');
+        Session::flash('success', 'Movie deleted!');
         return redirect('/admin/movies/');
     }
 }

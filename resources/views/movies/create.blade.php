@@ -1,14 +1,6 @@
 @extends('layouts.master')
 @section("content")
 
-{{-- Flash Session --}}
-@if(Session::has('message'))
-<div class="alert alert-info">
-	<a class="close" data-dismiss="alert">×</a>
-	<h1><strong>Heads Up!</strong> {!!Session::get('message')!!}</h1>
-</div>
-@endif
-
 {{-- Form --}}
 <form class="ink-form" id="movieDetailForm" method="POST" action="/admin/movies">
 	{{ csrf_field() }}
@@ -105,6 +97,24 @@
 				@endforeach
 				@endif
 			</div>
+
+			{{-- Poster --}}
+			<div class="control-group all-100 required">
+				<label for="detailFormMoviePoster">
+					Poster
+				</label>
+				<div class="control">
+					<input type="text" id="detailFormMoviePoster" name="movie_poster"/>
+				</div>
+				<p class="tip">
+					Please enter the full url (starting with http://)
+				</p>
+				@if($errors->get('movie_poster'))
+				@foreach($errors->get('movie_poster') as $error)
+				<p class="error-message tip">{{ $error }}</p>
+				@endforeach
+				@endif
+			</div>
 		</div>
 
 		{{-- Genre Checkboxes --}}
@@ -125,7 +135,7 @@
 					@foreach($genres as $genre)
 					<li>
 						<input id="detailFormMovieGenre{{$genre->id}}" name="movie_genres[]" type="checkbox" value="{{$genre->id}}"/>
-						<label class="ink-badge orange" for="detailFormMovieGenre{{$genre->id}}">{{$genre->name}}</label>
+						<label for="detailFormMovieGenre{{$genre->id}}">{{$genre->name}}</label>
 					</li>
 					@endforeach
 				</ul>

@@ -7,7 +7,7 @@
                 
                 <h2 class="movie-details-title">{{$movie->title}}</h2>
                 {{-- Available --}}
-                <p><span class="movie-details-released">{{$movie->released}} |</span> 
+                <p><span class="movie-details-released">{{$movie->released}} |</span>
                 @foreach ($movie->genres as $genre)
                 <span class="movie-details-genre ink-badge">{{$genre->name}}</span>
                 @endforeach
@@ -34,14 +34,14 @@
             <button class="ink-button red">Unavailable</button>
             @elseif (Auth::user())
             <button class="ink-button green" id="movieCheckOutTrigger">Check Out</button>
-            @else            
+            @else
             <button class="ink-button green">Available</button>
             @endif
-
+            
             @if (Auth::user())
             <button class="ink-button orange" id="movieAddMixTrigger">Add to MovieMix</button>
             @endif
-
+            
         </section>
     </div>
     
@@ -59,12 +59,40 @@
                     
                     {{ csrf_field() }}
                     
-                    <h2>Check out <em>{{$movie->title}}</em>?</h2>
-                    <div style="text-align:right"><input type="submit"  class="ink-button green" id="detailFormMovieSubmitButton" value="Check Out"/></div>
+                    <h3>Check out <em>{{$movie->title}}</em>?</h3>
+                    <div style="text-align:right"><input type="submit"  class="ink-button green" value="Check Out"/></div>
                 </form>
             </div>
         </div>
     </div>
-</div>
+    
+    <div class="ink-shade fade">
+        <div class="ink-modal fade add-moviemix-modal" data-trigger="#movieAddMixTrigger" data-width="800px" data-height="400px" data-close-on-click="true" role="dialog" aria-hidden="true" aria-labelled-by="modal-title">
+            <div class="modal-body add-moviemix-modal-body">
+                <form class="ink-form ink-grid" method="POST" action="/moviemixes">
+                    
+                    {{ csrf_field() }}
+
+                    {{ Form::hidden('movie_id', $movie->id)  }}
+                    <?php $movie_mixes = Auth::user()->movie_mixes()->get(); ?>
+                    <h3>Which moviemix would you like to add this movie to?</h3>
+                    @if($movie_mixes)
+                    <div class="control-group all-100">
+                        <ul class="control unstyled">
+                            @foreach($movie_mixes as $movie_mix)
+                            <li><input id="movieMix{{$movie_mix->id}}" type="radio" name="moviemix_title" value="{{$movie_mix->id}}"><label for="movieMix{{$movie_mix->id}}">{{$movie_mix->name}}</label></li>
+                            @endforeach
+                            
+                            <li><input id="newMixRadio" type="radio" name="moviemix_title" value="new-mix"><label for="newMixRadio">Create New Mix</label></li>
+                            <input style="display:none" type="text" name="newmoviemix_title" id="newMixInputField"/>
+                            <li><input style="display:none" type="checkbox" name="newmoviemix_public" id="newMixPublicField"/><label id="newMixPublicLabel" style="display:none" for="newMixPublicField">Make mix public?</label></li>
+                        </ul>
+                        <div style="text-align:right"><input type="submit"  class="ink-button green" value="Add"/></div>
+                    </div>
+                    @endif                    
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 @stop

@@ -28,8 +28,7 @@
                 
                 <div>
                     <li><a href="{{ url('/movies') }}">Movies</a></li>
-                    <li><a href="#">Genres</a></li>
-                    <li><a href="#">MovieMixes</a></li>
+                    <li><a href="{{ url('/moviemixes')}}">MovieMixes</a></li>
                      @if (Auth::user()) <li><a href="/account/recommend">Recommend</a></li> @endif
                 </div>
                 
@@ -46,10 +45,16 @@
             </ul>
         </nav>
         {{-- Flash Messages --}}
-        @if(Session::has('message'))
+        @if(Session::has('error'))
         <div class="flash-message ink-alert basic" role="alert">
             <button class="ink-dismiss">&times;</button>
-            <p>{!!Session::get('message')!!}</p>
+            <p>{!!Session::get('error')!!}</p>
+        </div>
+        @endif
+        @if(Session::has('success'))
+        <div class="flash-message ink-alert basic success" role="alert">
+            <button class="ink-dismiss">&times;</button>
+            <p>{!!Session::get('success')!!}</p>
         </div>
         @endif
         <main>
@@ -57,7 +62,10 @@
         </main>
         <footer>
             <p>
-                © andmade {{ date('Y') }}
+                © andmade {{ date('Y') }} 
+                @if(Auth::user()->role =='admin')
+                <span>| <a href="/admin/movies">Admin Dashboard</a></span>
+                @endif
             </p>
         </footer>
         <script type="text/javascript" src="http://fastly.ink.sapo.pt/3.1.10/js/ink-all.js"></script>

@@ -1,7 +1,14 @@
 $(document).ready(function() {
+
+    $('#newMixRadio').change(function() {
+        if ($(this).is(':checked')) {
+            $('#newMixInputField').show();
+            $('#newMixPublicField').show()
+            $('#newMixPublicLabel').show();
+        }
+    });
     $('#apiMovieSearchButton').click(function(event) {
         event.preventDefault();
-        console.log($('#detailFormMovieTitle').val());
         $.ajax({
             url: '/admin/movies/create',
             method: 'POST',
@@ -23,6 +30,7 @@ $(document).ready(function() {
                 $('#detailFormMovieSynopsis').val(data["plot"]);
                 $('#detailFormMovieDirector').val(data["director"]);
                 $('#detailFormMovieActors').val(data["actors"]);
+                $('#detailFormMoviePoster').val(data["poster"]);
                 var genres = data["genre"];
                 $('[type="checkbox"]').map(function() {
                     if (genres.includes($('label[for=' + this.id + ']').text())) {

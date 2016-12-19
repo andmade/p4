@@ -1,12 +1,7 @@
 @extends('layouts.master')
 @section("content")
 
-@if(Session::has('message'))
-<div class="alert alert-info">
-    <a class="close" data-dismiss="alert">×</a>
-    <h1><strong>Heads Up!</strong> {!!Session::get('message')!!}</h1>
-</div>
-@endif
+<h2><a href="/admin/movies/create">Add A Movie to The Database</a></h2>
 <div class="ink-grid">
     <div class="column-group">
         <div class="all-100 large-25">
@@ -17,7 +12,7 @@
                     <div class="ink-shade fade">
                         <div class="ink-modal fade delete-movie-modal" data-trigger="#modalDeleteMovie{{$movie->id}}" data-width="800px" data-height="150px" data-close-on-click="true" role="dialog" aria-hidden="true" aria-labelled-by="modal-title">
                             <div class="modal-body delete-movie-modal-body">
-                                <form class="ink-form" method="POST" action="/admin/movies/{{$movie->url.'-'.$movie->id}}">
+                                <form class="ink-form" method="POST" action="/admin/movies/{{$movie->id.'-'.$movie->url}}">
                                     
                                     {{ method_field('DELETE') }}
                                     {{ csrf_field() }}

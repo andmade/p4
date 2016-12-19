@@ -47,7 +47,7 @@ class RecommendationController extends Controller
         $recommendation->released = $request->movie_released;
         $recommendation->save();
 
-        Session::flash('message', 'Movie recommendation added!');
+        Session::flash('success', 'Movie recommendation added!');
         return redirect('/account/recommend');
 
     }

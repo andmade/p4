@@ -1,16 +1,8 @@
 @extends('layouts.master')
 @section("content")
 
-{{-- Flash Session --}}
-@if(Session::has('message'))
-<div class="alert alert-info">
-	<a class="close" data-dismiss="alert">×</a>
-	<h1><strong>Heads Up!</strong> {!!Session::get('message')!!}</h1>
-</div>
-@endif
-
 {{-- Form --}}
-<form class="ink-form" id="movieDetailForm" method="POST" action="/admin/movies/{{$retrieved_movie->url.'-'.$retrieved_movie->id}}">
+<form class="ink-form" id="movieDetailForm" method="POST" action="/admin/movies/{{$retrieved_movie->id.'-'.$retrieved_movie->url}}">
 	
 	{{ method_field('PUT') }}
 	{{ csrf_field() }}
@@ -117,13 +109,13 @@
 						checked="checked"
 						@endif
 						/>
-						<label class="ink-badge orange" for="detailFormMovieGenre{{$genre->id}}">{{$genre->name}}</label>
+						<label for="detailFormMovieGenre{{$genre->id}}">{{$genre->name}}</label>
 					</li>
 					@endforeach
 				</ul>
 			</fieldset>
 			<div class="control-group all-50">
-				<div class="control " role="search">
+				<div class="control" role="search">
 					<input type="submit"  class="ink-button blue" id="detailFormMovieSubmitButton" value="Update Movie"/>
 				</div>
 			</div>

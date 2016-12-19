@@ -33,7 +33,7 @@ class UserController extends Controller
             ]);
             $movie->available = false;
             $movie->save();
-            Session::flash('message', 'Movie successfully checked out');
+            Session::flash('success', 'Movie successfully checked out');
             return view('movies.show')->with("movie", $movie);
         }
     }
@@ -47,10 +47,10 @@ class UserController extends Controller
             $movie->available = true;
             $movie->save();
             $user->save();
-            Session::flash('message', 'Movie returned!');
+            Session::flash('success', 'Movie returned!');
             return back()->withInput();
         } else {
-            Session::flash('message', 'Movie not checked out.');
+            Session::flash('error', 'Movie not checked out.');
             return back();
         }
     }
